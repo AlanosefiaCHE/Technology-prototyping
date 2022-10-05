@@ -1,8 +1,11 @@
-from dataclasses import dataclass
+import json
+
+import deep_translator
+
 from flask import Flask, render_template, request
+
 import nltk
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
-import json
 
 app = Flask(__name__)
 
@@ -54,4 +57,7 @@ def analyze_tweet(tweet_text):
 
 def get_tweets():
     with open('example_tweets.json', 'r') as f:
-        return json.load(f)['tweets']
+        data = json.load(f)['tweets']
+
+    return deep_translator.GoogleTranslator(
+        source="auto", target="en").translate_batch(data)
