@@ -22,16 +22,32 @@
       </ul>
   </nav>
 </header>
+<h2 id="lblGreetings" class="greeting"></h2>
   <div class="container">
     <div class="card">
       <form action="">
         <img src="icon1.png"><label for="fname">Twitternaam:</label><br>
         <input type="text" id="fname" name="fname"><br><br>
-        <input type="radio"> 
-        <label for="email">Selecteer periode</label><br>
-        <input type="radio"> 
-        <label for="email">Aantal tweets vanaf een datum</label><br><br>
+        <script type="text/javascript">
 
+          function yesnoCheck() {
+              if (document.getElementById('yesCheck').checked) {
+                  document.getElementById('ifYes').style.display = 'block';
+              }
+              else document.getElementById('ifYes').style.display = 'none';
+          
+          }
+          
+          </script>
+          <input type="radio" onclick="javascript:yesnoCheck();" name="yesno" id="noCheck">Selecteer periode <br>
+          <br>
+          <input type="radio" onclick="javascript:yesnoCheck();" name="yesno" id="yesCheck">Aantal Tweets vanaf een datum<br><br>
+              <div id="ifYes" style="display:none">
+                  Aantal gewenste tweets <input type='text' id='yes' name='yes'><br>
+              </div>
+                  
+                 
+          
       <br>
       <img src="icon2.png"><label for="date">Selecteer periode:</label><br>
         <input type="datetime-local" id="Test_DatetimeLocal"><br><br>
@@ -63,4 +79,41 @@
       </div>
     </footer>
 </html>
+
+<script>
+  var myDate = new Date();
+  var hrs = myDate.getHours();
+
+  var greet;
+
+  if (hrs < 12)
+      greet = 'Good Morning';
+  else if (hrs >= 12 && hrs <= 17)
+      greet = 'Good Afternoon';
+  else if (hrs >= 17 && hrs <= 24)
+      greet = 'Good Evening';
+
+  document.getElementById('lblGreetings').innerHTML =
+      '<b>' + greet + ' and welcome to PharmyTweet!';
+
+        const btn = document.querySelector('#btn');        
+        const radioButtons = document.querySelectorAll('input[name="size"]');
+        btn.addEventListener("click", () => {
+            let selectedSize;
+            for (const radioButton of radioButtons) {
+                if (radioButton.checked) {
+                    selectedSize = radioButton.value;
+                    break;
+                }
+            }
+
+            function yesnoCheck() {
+    if (document.getElementById('yesCheck').checked) {
+        document.getElementById('ifYes').style.display = 'block';
+    }
+    else document.getElementById('ifYes').style.display = 'none';
+
+}
+        });
+</script> 
 

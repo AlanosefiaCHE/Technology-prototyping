@@ -122,7 +122,7 @@ footer{
     font-size: 15px;
   }
     .container {
-  height: 100vh;
+  height: 60vh;
   width: 100vw;
   display: flex;
   flex-direction: row;
@@ -130,7 +130,6 @@ footer{
   justify-content: center;
   }
   
-  /* Actual card with shadow */
   .card {
   height: 300px;
   width: 900px;
@@ -218,4 +217,11 @@ li::after {
 
 li:hover::after {
     width: 2rem;
+}
+
+.greeting{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 }
