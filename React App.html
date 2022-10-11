@@ -4,44 +4,38 @@
 <title>Pharmy Tweet</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="style.css">
-
-<style>
-body {font-family: "Lato", sans-serif}
-.mySlides {display: none}
-</style>
+<link rel = "icon" href = "icon3.png" 
+        type = "image/x-icon">
 </head>
 <body>
 <!-- Navbar -->
-<div class="w3-top">
+<header>
   <img src="logo.png" class = "logo" alt="logo" href="m">
-  <div class="w3-bar w3-black w3-card">
-    <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right" href="javascript:void(0)" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
-    <a href="#" class="w3-bar-item w3-button w3-padding-large">Home</a>
-    <a href="#" class="w3-bar-item w3-button w3-padding-large">About</a>
-    <a href="#" class="w3-bar-item w3-button w3-padding-large">Contact</a>
-
-    </div>
-    <a href="javascript:void(0)" class="w3-padding-large w3-hover-red w3-hide-small w3-right"><i class="fa fa-search"></i></a>
   </div>
 
+  <nav>
+      <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">About us</a></li>
+          <li><a href="#">Contact</a></li>
+      </ul>
+  </nav>
+</header>
   <div class="container">
     <div class="card">
       <form action="">
-        <label for="fname">Twitternaam:</label>
-        <input type="text" id="fname" name="fname"><br>
+        <img src="icon1.png"><label for="fname">Twitternaam:</label><br>
+        <input type="text" id="fname" name="fname"><br><br>
         <input type="radio"> 
         <label for="email">Selecteer periode</label><br>
         <input type="radio"> 
-        <label for="email">Aantal tweets van een datum</label>
+        <label for="email">Aantal tweets vanaf een datum</label><br><br>
 
-      </input><br>
-        <label for="date">Selecteer periode</label>
+      <br>
+      <img src="icon2.png"><label for="date">Selecteer periode:</label><br>
         <input type="datetime-local" id="Test_DatetimeLocal"><br><br>
-        <input type="submit" value="Submit">
+        <input type="submit" value="Submit" class="submit">
       </form>
   </div>
 
@@ -60,7 +54,7 @@ body {font-family: "Lato", sans-serif}
         <div class="right-col">
           <h1>Pharmy Tweet </h1>
           <div class="border"></div>
-          <p>Get the freshest news from us!</p>
+          <p>Get the freshest news from us!</p><br>
           <form action="" class="newsletter-form">
             <input type="text" class="txtb" placeholder="Enter Your Email">
             <input type="submit" class="btn" value="Submit">
