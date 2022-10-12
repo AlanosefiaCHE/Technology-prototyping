@@ -39,7 +39,7 @@
           }
           
           </script>
-          <input type="radio" onclick="javascript:yesnoCheck();" name="yesno" id="noCheck">Select period <br>
+          <input type="radio"  onclick="javascript:yesnoCheck();" name="yesno" id="noCheck">Select period <br>
           <br>
           <input type="radio" onclick="javascript:yesnoCheck();" name="yesno" id="yesCheck">Number of Tweets from a date<br><br>
               <div id="ifYes" style="display:none">
@@ -49,7 +49,9 @@
                  
           
       <br>
-      <img src="icon2.png"><label for="date">Select period:</label><br>
+      <img src="icon2.png"><label for="date">Select begin period:</label><br>
+        <input type="datetime-local" id="Test_DatetimeLocal"><br><br>
+        <img src="icon2.png"><label for="date">Select end period:</label><br>
         <input type="datetime-local" id="Test_DatetimeLocal"><br><br>
         <input type="submit" value="Submit" class="submit">
       </form>
