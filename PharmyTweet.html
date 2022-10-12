@@ -30,31 +30,35 @@
         <input type="text" id="fname" name="fname"><br><br>
         <script type="text/javascript">
 
-          function yesnoCheck() {
-              if (document.getElementById('yesCheck').checked) {
-                  document.getElementById('ifYes').style.display = 'block';
-              }
-              else document.getElementById('ifYes').style.display = 'none';
+function yesnoCheck() {
+  if (document.getElementById('yesCheck').checked) {
+    document.getElementById('ifYes').style.display = 'block';
+    document.getElementById('select-end-period').style.display = 'none';
+
+  } else {
+    document.getElementById('ifYes').style.display = 'none';
+    document.getElementById('select-end-period').style.display = 'block';
+  }
+}
           
-          }
-          
-          </script>
-          <input type="radio"  onclick="javascript:yesnoCheck();" name="yesno" id="noCheck">Select period <br>
-          <br>
-          <input type="radio" onclick="javascript:yesnoCheck();" name="yesno" id="yesCheck">Number of Tweets from a date<br><br>
-              <div id="ifYes" style="display:none">
-                Number of desired tweets <input type="number" min="1" max="20" id='yes' name='yes'><br>
-              </div>
-                  
-                 
-          
-      <br>
-      <img src="icon2.png"><label for="date">Select begin period:</label><br>
-        <input type="datetime-local" id="Test_DatetimeLocal"><br><br>
-        <img src="icon2.png"><label for="date">Select end period:</label><br>
-        <input type="datetime-local" id="Test_DatetimeLocal"><br><br>
-        <input type="submit" value="Submit" class="submit">
-      </form>
+</script>
+  <input type="radio" onclick="javascript:yesnoCheck();" name="yesno" id="noCheck">Select period <br>
+  <br>
+  <input type="radio" onclick="javascript:yesnoCheck();" name="yesno" id="yesCheck">Number of Tweets from a date<br><br>
+  <div id="ifYes" style="display:none">
+    Number of desired tweets <input type="number" min="1" max="20" id='yes' name='yes'><br>
+  </div>
+
+
+  <br>
+  <img src="icon2.png"><label for="date">Select begin period:</label><br>
+  <input type="datetime-local" id="Test_DatetimeLocal"><br><br>
+  <div id="select-end-period">
+    <img src="icon2.png"><label for="date">Select end period:</label><br>
+    <input type="datetime-local" id="Test_DatetimeLocal"><br><br>
+  </div>
+  <input type="submit" value="Submit" class="submit">
+</form>
   </div>
 
  
