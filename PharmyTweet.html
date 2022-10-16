@@ -1,89 +1,129 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<title>Pharmy Tweet</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="style.css">
-<link rel = "icon" href = "icon3.png" 
-        type = "image/x-icon">
-</head>
-<body>
-<!-- Navbar -->
-<header>
-  <img src="logo.png" class = "logo" alt="logo" href="m">
-  </div>
 
-  <nav>
+<head>
+  <title>Pharmy Tweet</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="Logo.svg" type="image/x-icon">
+</head>
+
+<body>
+  <!-- Navbar -->
+  <header>
+    <img src="Full-Logo.svg" class="logo" alt="logo" href="m">
+    </div>
+
+    <nav>
       <ul>
-          <li><a href="#">Home</a></li>
-          <li><a href="#">About us</a></li>
-          <li><a href="#">Contact</a></li>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About us</a></li>
+        <li><a href="#">Contact</a></li>
       </ul>
-  </nav>
-</header>
-<h2 id="lblGreetings" class="greeting"></h2>
+    </nav>
+  </header>
+
+
+  <h2 id="lblGreetings" class="greeting"></h2>
+
   <div class="container">
-    <div class="card">
+    <div class="left">
       <form action="">
-        <img src="icon1.png"><label for="fname" required>Twitter name:</label><br>
-        <input type="text" id="fname" name="fname"><br><br>
+        <div class="inputTextMiddle">
+          <img src="User.svg"><label for="fname" required>Twitter name:</label>
+        </div>
+        <input type="text" class="textInput" id="fname" name="fname">
         <script type="text/javascript">
 
-function yesnoCheck() {
-  if (document.getElementById('yesCheck').checked) {
-    document.getElementById('ifYes').style.display = 'block';
-    document.getElementById('select-end-period').style.display = 'none';
+          function yesnoCheck() {
+            if (document.getElementById('yesCheck').checked) {
+              document.getElementById('ifYes').style.display = 'block';
+              document.getElementById('select-end-period').style.display = 'none';
 
-  } else {
-    document.getElementById('ifYes').style.display = 'none';
-    document.getElementById('select-end-period').style.display = 'block';
-  }
-}
-          
-</script>
-  <input type="radio" onclick="javascript:yesnoCheck();" name="yesno" id="noCheck" value="" checked>Select period <br>
-  <br>
-  <input type="radio" onclick="javascript:yesnoCheck();" name="yesno" id="yesCheck">Number of Tweets from a date<br><br>
-  <div id="ifYes" style="display:none">
-    Number of desired tweets <input type="number" min="1" max="20" id='yes' name='yes'><br>
+            } else {
+              document.getElementById('ifYes').style.display = 'none';
+              document.getElementById('select-end-period').style.display = 'block';
+            }
+          }
+
+        </script>
+        <input class="marginTop" type="radio" onclick="javascript:yesnoCheck();" name="yesno" id="noCheck" value=""
+          checked>Select period
+        <br>
+        <input type="radio" onclick="javascript:yesnoCheck();" name="yesno" id="yesCheck">Number of Tweets from a
+        date<br>
+        <div class="marginTop" id="ifYes" style="display:none">
+          <div class="inputTextMiddle">
+            <img src="Number-icon.svg"><label for="date">Number of desired tweets:</label>
+          </div>
+          <input type="number" class="textInput" min="1" max="20" id='yes' name='yes'>
+
+        </div>
+
+
+        <div class="inputTextMiddle">
+          <img class="marginTop" src="DateLogo-1.svg"><label class="marginTop" for="date">Select begin period:</label>
+        </div>
+        <input type="datetime-local" class="textInput" id="Test_DatetimeLocal">
+
+        <div id="select-end-period">
+          <div class="inputTextMiddle">
+            <img class="marginTop" src="DateLogo-19.svg"><label class="marginTop" for="date">Select end period:</label>
+          </div>
+          <input type="datetime-local" class="textInput" id="Test_DatetimeLocal">
+        </div>
+
+        <div class="marginTop">
+          <input type="submit" value="Submit" class="submit">
+        </div>
+      </form>
+    </div>
+
+
+
+
+    <div class="right">
+      <h3>Resultaat</h3>
+      <img src="GraphExample.png" alt="Graph with results" class="resultGraph">
+      <p>
+      <form action="/tweets" method="get">
+        <input type="checkbox" name="positive" value="positive">
+        <label for="positive"> View all positive Tweets</label><br>
+        <input type="checkbox" name="neutral" value="neutral">
+        <label for="neutral"> View all neutral Tweets</label><br>
+        <input type="checkbox" name="negative" value="negative">
+        <label for="negative"> View all negative Tweets</label><br><br>
+        <div class="submit2">
+          <input class="submit" type="submit" value="Submit">
+        </div>
+      </form>
+      </p>
+    </div>
+
   </div>
-
-
-  <br>
-  <img src="icon2.png"><label for="date">Select begin period:</label><br>
-  <input type="datetime-local" id="Test_DatetimeLocal"><br><br>
-  <div id="select-end-period">
-    <img src="icon2.png"><label for="date">Select end period:</label><br>
-    <input type="datetime-local" id="Test_DatetimeLocal"><br><br>
-  </div>
-  <input type="submit" value="Submit" class="submit">
-</form>
-  </div>
-
- 
-</div>
 
 </body>
 <footer>
-      <div class="footer-container">
-        <div class="left-col">
-          <img src="logo.png" alt="" class="logo">
+  <div class="footer-container">
+    <div class="left-col">
+      <img src="Full-Logo.svg" alt="" class="logo">
 
-          <p class="rights-text">© 2022 Created By <b>Farmy Tweet</b>  All Rights Reserved.</p>
-        </div>
- 
-        <div class="right-col">
-          <h1>Pharmy Tweet </h1>
-          <div class="border"></div>
-          <p>Get the freshest news from us!</p><br>
-          <form action="" class="newsletter-form">
-            <input type="text" class="txtb" placeholder="Enter Your Email">
-            <input type="submit" class="btn" value="Submit">
-          </form>
-        </div>
-      </div>
-    </footer>
+      <p class="rights-text">© 2022 Created By <b>Farmy Tweet</b> All Rights Reserved.</p>
+    </div>
+
+    <div class="right-col">
+      <h1>Pharmy Tweet </h1>
+      <div class="border"></div>
+      <p>Get the freshest news from us!</p><br>
+      <form action="" class="newsletter-form">
+        <input type="text" class="txtb" placeholder="Enter Your Email">
+        <input type="submit" class="btn" value="Submit">
+      </form>
+    </div>
+  </div>
+</footer>
+
 </html>
 
 <script>
@@ -93,33 +133,32 @@ function yesnoCheck() {
   var greet;
 
   if (hrs < 12)
-      greet = 'Good Morning';
+    greet = 'Good Morning';
   else if (hrs >= 12 && hrs <= 17)
-      greet = 'Good Afternoon';
+    greet = 'Good Afternoon';
   else if (hrs >= 17 && hrs <= 24)
-      greet = 'Good Evening';
+    greet = 'Good Evening';
 
   document.getElementById('lblGreetings').innerHTML =
-      '<b>' + greet + ' and welcome to PharmyTweet!';
+    '<b>' + greet + ' and welcome to PharmyTweet!';
 
-        const btn = document.querySelector('#btn');        
-        const radioButtons = document.querySelectorAll('input[name="size"]');
-        btn.addEventListener("click", () => {
-            let selectedSize;
-            for (const radioButton of radioButtons) {
-                if (radioButton.checked) {
-                    selectedSize = radioButton.value;
-                    break;
-                }
-            }
-
-            function yesnoCheck() {
-    if (document.getElementById('yesCheck').checked) {
-        document.getElementById('ifYes').style.display = 'block';
+  const btn = document.querySelector('#btn');
+  const radioButtons = document.querySelectorAll('input[name="size"]');
+  btn.addEventListener("click", () => {
+    let selectedSize;
+    for (const radioButton of radioButtons) {
+      if (radioButton.checked) {
+        selectedSize = radioButton.value;
+        break;
+      }
     }
-    else document.getElementById('ifYes').style.display = 'none';
 
-}
-        });
-</script> 
+    function yesnoCheck() {
+      if (document.getElementById('yesCheck').checked) {
+        document.getElementById('ifYes').style.display = 'block';
+      }
+      else document.getElementById('ifYes').style.display = 'none';
 
+    }
+  });
+</script>
