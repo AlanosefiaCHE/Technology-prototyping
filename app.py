@@ -1,8 +1,10 @@
-from datetime import datetime, date
-import pygal
-import tweepy
+from datetime import datetime
+
 import deep_translator
 import nltk
+import pygal
+import tweepy
+
 from flask import Flask, render_template, request, make_response
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 
