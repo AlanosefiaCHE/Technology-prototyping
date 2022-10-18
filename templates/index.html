@@ -2,165 +2,166 @@
 <html lang="en">
 
 <head>
-  <title>Pharmy Tweet</title>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="/static/style.css">
-  <link rel="icon" href="/static/images/logo.svg" type="image/x-icon">
+    <meta charset="UTF-8">
+    <title>Pharmy Tweet</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="icon" href="/static/images/logo.svg" type="image/x-icon">
+
+    <link rel="stylesheet" href="/static/style.css">
+
+    <script>
+        function showGreeting() {
+            var myDate = new Date();
+            var hrs = myDate.getHours();
+
+            var greet;
+
+            if (hrs < 12)
+                greet = 'Good Morning';
+            else if (hrs >= 12 && hrs <= 17)
+                greet = 'Good Afternoon';
+            else if (hrs >= 17 && hrs <= 24)
+                greet = 'Good Evening';
+
+            document.getElementById('lblGreetings').innerHTML =
+                '<b>' + greet + ' and welcome to PharmyTweet!';
+
+            const btn = document.querySelector('#btn');
+            const radioButtons = document.querySelectorAll('input[name="size"]');
+            btn.addEventListener("click", () => {
+                let selectedSize;
+                for (const radioButton of radioButtons) {
+                    if (radioButton.checked) {
+                        selectedSize = radioButton.value;
+                        break;
+                    }
+                }
+            });
+        }
+
+        function rangeOrAmountFromCheck() {
+            if (document.getElementById('range').checked) {
+                document.getElementById('numberOfTweets').style.display = 'none';
+                document.getElementById('selectEndPeriod').style.display = 'block';
+            } else {
+                document.getElementById('numberOfTweets').style.display = 'block';
+                document.getElementById('selectEndPeriod').style.display = 'none';
+            }
+        }
+
+        window.onload = showGreeting;
+    </script>
 </head>
 
 <body>
-  <!-- Navbar -->
-  <header>
-    <img src="/static/images/full-logo.svg" class="logo" alt="logo" href="m">
-    </div>
 
-    <nav>
-      <ul>
-        <li><a href="#">Home</a></li>
-        <li><a href="#">About us</a></li>
-        <li><a href="#">Contact</a></li>
-      </ul>
-    </nav>
-  </header>
-
-
-  <h2 id="lblGreetings" class="greeting"></h2>
-
-  <div class="container">
-    <div class="left">
-      <form action="">
-        <div class="inputTextMiddle">
-          <img src="/static/images/user.svg"><label for="fname" required>Twitter name:</label>
-        </div>
-        <input type="text" class="textInput" id="fname" name="fname">
-        <script type="text/javascript">
-
-          function yesnoCheck() {
-            if (document.getElementById('yesCheck').checked) {
-              document.getElementById('ifYes').style.display = 'block';
-              document.getElementById('select-end-period').style.display = 'none';
-
-            } else {
-              document.getElementById('ifYes').style.display = 'none';
-              document.getElementById('select-end-period').style.display = 'block';
-            }
-          }
-
-        </script>
-        <input class="marginTop" type="radio" onclick="javascript:yesnoCheck();" name="yesno" id="noCheck" value=""
-          checked>Select period
-        <br>
-        <input type="radio" onclick="javascript:yesnoCheck();" name="yesno" id="yesCheck">Number of Tweets from a
-        date<br>
-        <div class="marginTop" id="ifYes" style="display:none">
-          <div class="inputTextMiddle">
-            <img src="/static/images/number-icon.svg"><label for="date">Number of desired tweets:</label>
-          </div>
-          <input type="number" class="textInput" min="1" max="20" id='yes' name='yes'>
-
+    <header>
+        <div>
+            <a href="#"><img src="/static/images/full-logo.svg" class="logo" alt="logo"></a>
         </div>
 
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About us</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
 
-        <div class="inputTextMiddle">
-          <img class="marginTop" src="/static/images/datelogo-1.svg"><label class="marginTop" for="date">Select begin
-            period:</label>
+    <h2 class="greeting" id="lblGreetings"></h2>
+
+    <main class="container">
+        <div class="left">
+            <form method="post">
+                <!-- Name -->
+                <div class="inputTextMiddle">
+                    <img src="/static/images/user.svg">
+                    <label for="name">Twitter name:</label>
+                </div>
+                <input class="textInput" type="text" id="name" name="name">
+
+                <!-- Range or AmountFrom -->
+                <div>
+                    <input class="marginTop" type="radio" onclick="rangeOrAmountFromCheck();" id="range"
+                        name="rangeOrAmountFrom" value="range" checked>
+                    <label for="negative">Select period</label><br>
+
+                    <input class="marginTop" type="radio" onclick="rangeOrAmountFromCheck();" id="amountFrom"
+                        name="rangeOrAmountFrom" value="amountFrom">
+                    <label for="positive">Number of tweets from a date</label><br>
+                </div>
+
+                <!-- Amount of tweets -->
+                <div class="marginTop" id="numberOfTweets" style="display:none">
+                    <div class="inputTextMiddle">
+                        <img src="/static/images/number-icon.svg">
+                        <label for="amount">Number of desired tweets:</label>
+                    </div>
+                    <input class="textInput" type="number" min="1" max="20" id='amount' name='amount'>
+                </div>
+
+                <!-- From -->
+                <div class="inputTextMiddle">
+                    <img class="marginTop" src="/static/images/datelogo-1.svg">
+                    <label class="marginTop" for="from">Select begin period:</label>
+                </div>
+                <input class="textInput" type="datetime-local" id="from" name="from">
+
+                <!-- Until -->
+                <div id="selectEndPeriod">
+                    <div class="inputTextMiddle">
+                        <img class="marginTop" src="/static/images/datelogo-19.svg">
+                        <label class="marginTop" for="until">Select end period:</label>
+                    </div>
+                    <input class="textInput" type="datetime-local" id="until" name="until">
+                </div>
+
+                <!-- Sumbit -->
+                <div class="marginTop">
+                    <input class="submit" type="submit" value="Submit">
+                </div>
+            </form>
         </div>
-        <input type="datetime-local" class="textInput" id="Test_DatetimeLocal">
 
-        <div id="select-end-period">
-          <div class="inputTextMiddle">
-            <img class="marginTop" src="/static/images/datelogo-19.svg"><label class="marginTop" for="date">Select end
-              period:</label>
-          </div>
-          <input type="datetime-local" class="textInput" id="Test_DatetimeLocal">
+        <div class="right">
+            <h3>Resultaat</h3>
+            <img src="/static/images/graph-example.png" alt="Graph with results" class="resultGraph">
+            <!-- TODO: Activate form -->
+            <form>
+                <input type="checkbox" name="positive" value="positive">
+                <label for="positive"> View all positive Tweets</label><br>
+                <input type="checkbox" name="neutral" value="neutral">
+                <label for="neutral"> View all neutral Tweets</label><br>
+                <input type="checkbox" name="negative" value="negative">
+                <label for="negative"> View all negative Tweets</label><br><br>
+                <div class="submit2">
+                    <input class="submit" type="submit" value="Submit">
+                </div>
+            </form>
         </div>
+    </main>
 
-        <div class="marginTop">
-          <input type="submit" value="Submit" class="submit">
+    <footer>
+        <div class="footer-container">
+            <div class="left-col">
+                <img src="/static/images/full-logo.svg" class="logo">
+                <p class="rights-text">© 2022 Created By <b>Farmy Tweet</b> All Rights Reserved.</p>
+            </div>
+
+            <div class="right-col">
+                <h1>Pharmy Tweet </h1>
+                <div class="border"></div>
+                <p>Get the freshest news from us!</p><br>
+                <form class="newsletter-form">
+                    <input class="txtb" type="text" placeholder="Enter Your Email">
+                    <input class="btn" type="submit" value="Submit">
+                </form>
+            </div>
         </div>
-      </form>
-    </div>
-
-
-
-
-    <div class="right">
-      <h3>Resultaat</h3>
-      <img src="/static/images/graph-example.png" alt="Graph with results" class="resultGraph">
-      <p>
-      <form action="/tweets" method="get">
-        <input type="checkbox" name="positive" value="positive">
-        <label for="positive"> View all positive Tweets</label><br>
-        <input type="checkbox" name="neutral" value="neutral">
-        <label for="neutral"> View all neutral Tweets</label><br>
-        <input type="checkbox" name="negative" value="negative">
-        <label for="negative"> View all negative Tweets</label><br><br>
-        <div class="submit2">
-          <input class="submit" type="submit" value="Submit">
-        </div>
-      </form>
-      </p>
-    </div>
-
-  </div>
+    </footer>
 
 </body>
-<footer>
-  <div class="footer-container">
-    <div class="left-col">
-      <img src="/static/images/full-logo.svg" alt="" class="logo">
-
-      <p class="rights-text">© 2022 Created By <b>Farmy Tweet</b> All Rights Reserved.</p>
-    </div>
-
-    <div class="right-col">
-      <h1>Pharmy Tweet </h1>
-      <div class="border"></div>
-      <p>Get the freshest news from us!</p><br>
-      <form action="" class="newsletter-form">
-        <input type="text" class="txtb" placeholder="Enter Your Email">
-        <input type="submit" class="btn" value="Submit">
-      </form>
-    </div>
-  </div>
-</footer>
 
 </html>
-
-<script>
-  var myDate = new Date();
-  var hrs = myDate.getHours();
-
-  var greet;
-
-  if (hrs < 12)
-    greet = 'Good Morning';
-  else if (hrs >= 12 && hrs <= 17)
-    greet = 'Good Afternoon';
-  else if (hrs >= 17 && hrs <= 24)
-    greet = 'Good Evening';
-
-  document.getElementById('lblGreetings').innerHTML =
-    '<b>' + greet + ' and welcome to PharmyTweet!';
-
-  const btn = document.querySelector('#btn');
-  const radioButtons = document.querySelectorAll('input[name="size"]');
-  btn.addEventListener("click", () => {
-    let selectedSize;
-    for (const radioButton of radioButtons) {
-      if (radioButton.checked) {
-        selectedSize = radioButton.value;
-        break;
-      }
-    }
-
-    function yesnoCheck() {
-      if (document.getElementById('yesCheck').checked) {
-        document.getElementById('ifYes').style.display = 'block';
-      }
-      else document.getElementById('ifYes').style.display = 'none';
-
-    }
-  });
-</script>
