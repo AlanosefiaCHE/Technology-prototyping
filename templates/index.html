@@ -75,14 +75,12 @@
 <main class="container">
     <div class="left">
         <form method="post">
-            <!-- Name -->
             <div class="inputTextMiddle">
                 <img src="/static/images/user.svg">
                 <label for="name">Twitter name:</label>
             </div>
             <input class="textInput" type="text" id="name" name="name">
 
-            <!-- Range or AmountFrom -->
             <div>
                 <input class="marginTop" type="radio" onclick="rangeOrAmountFromCheck();" id="range"
                        name="rangeOrAmountFrom" value="range" checked>
@@ -93,7 +91,6 @@
                 <label for="positive">Number of tweets from a date</label><br>
             </div>
 
-            <!-- Amount of tweets -->
             <div class="marginTop" id="numberOfTweets" style="display:none">
                 <div class="inputTextMiddle">
                     <img src="/static/images/number-icon.svg">
@@ -102,14 +99,12 @@
                 <input class="textInput" type="number" min="1" max="20" id='amount' name='amount'>
             </div>
 
-            <!-- From -->
             <div class="inputTextMiddle">
                 <img class="marginTop" src="/static/images/datelogo-1.svg">
                 <label class="marginTop" for="from">Select begin period:</label>
             </div>
             <input class="textInput" type="date" id="from" name="from">
 
-            <!-- Until -->
             <div id="selectEndPeriod">
                 <div class="inputTextMiddle">
                     <img class="marginTop" src="/static/images/datelogo-19.svg">
@@ -118,7 +113,6 @@
                 <input class="textInput" type="date" id="until" name="until">
             </div>
 
-            <!-- Sumbit -->
             <div class="marginTop">
                 <input class="submit" type="submit" value="Submit">
             </div>
