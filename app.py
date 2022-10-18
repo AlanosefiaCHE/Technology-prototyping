@@ -9,7 +9,8 @@ from nltk.sentiment.vader import SentimentIntensityAnalyzer
 app = Flask(__name__)
 
 CLIENT = tweepy.Client(
-    'AAAAAAAAAAAAAAAAAAAAAG9EhAEAAAAA%2BLR%2BJ1%2FpM0UC5y9QfHxPND7ccAI%3DvHGlimS0Gz93SWTqFglsr2J3PkYGUfLd7S7czHwsXyRMww8dNZ')
+    'AAAAAAAAAAAAAAAAAAAAAG9EhAEAAAAA%2BLR%2BJ1%2FpM0UC5y9QfHxPND7ccAI%3DvHGlimS0Gz93SWTqFglsr2J3PkYGUfLd7S7czHwsXyRMww8dNZ',
+    return_type=dict)
 
 SID = SentimentIntensityAnalyzer()
 
@@ -17,14 +18,6 @@ SID = SentimentIntensityAnalyzer()
 @app.route("/", methods=('GET', 'POST'))
 def index():
     if request.method == 'GET':
-        # tweets = get_tweets(id='367703310',
-        #                     max_results=8,
-        #                     from_date=datetime(2022, 9, 18, 0, 0),
-        #                     until_date=datetime(2022, 10, 18, 23, 59))
-        # translated_tweets = translate_tweets(tweets)
-        # scores_tweets = analyze_tweets(translated_tweets)
-        # graph = plot_tweets(scores_tweets)
-
         return render_template('index.html')
 
     if request.method == 'POST':
@@ -33,10 +26,7 @@ def index():
 
         # name = form['name']
 
-        client2 = tweepy.Client(
-            'AAAAAAAAAAAAAAAAAAAAAG9EhAEAAAAA%2BLR%2BJ1%2FpM0UC5y9QfHxPND7ccAI%3DvHGlimS0Gz93SWTqFglsr2J3PkYGUfLd7S7czHwsXyRMww8dNZ',
-            return_type=dict)
-        twitterid = client2.get_users(usernames=[form['name']])
+        twitterid = CLIENT.get_users(usernames=[form['name']])
         id = twitterid['data'][0]['id']
 
         if form['rangeOrAmountFrom'] == 'range':
@@ -70,14 +60,14 @@ def get_tweets(id, max_results, from_date, until_date):
     """Get_tweets takes an id, max_results, from_date and an until_date and returns tweets as a list of strings."""
     tweets_list = []
 
-    tweets = tweepy.Paginator(CLIENT.get_users_tweets,
-                              id=id,
-                              end_time=until_date,
-                              max_results=max_results,
-                              start_time=from_date)
+    tweets = CLIENT.get_users_tweets(
+        id=id,
+        end_time=until_date,
+        max_results=max_results,
+        start_time=from_date)
 
-    for tweet in tweets.flatten(limit=max_results):
-        tweets_list.append(tweet.text)
+    for tweet in tweets['data']:
+        tweets_list.append(tweet['text'])
 
     return tweets_list
 
