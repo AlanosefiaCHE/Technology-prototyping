@@ -10,11 +10,11 @@ from nltk.sentiment.vader import SentimentIntensityAnalyzer
 
 app = Flask(__name__)
 
+FORM_DATE_STRING = '%Y-%m-%d'
+
 CLIENT = tweepy.Client(
     'AAAAAAAAAAAAAAAAAAAAAG9EhAEAAAAA%2BLR%2BJ1%2FpM0UC5y9QfHxPND7ccAI%3DvHGlimS0Gz93SWTqFglsr2J3PkYGUfLd7S7czHwsXyRMww8dNZ',
     return_type=dict)
-
-FORM_DATE_STRING = '%Y-%m-%d'
 
 SID = SentimentIntensityAnalyzer()
 
