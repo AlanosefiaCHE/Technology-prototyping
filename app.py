@@ -8,7 +8,7 @@ from nltk.sentiment.vader import SentimentIntensityAnalyzer
 
 app = Flask(__name__)
 
-client = tweepy.Client(
+CLIENT = tweepy.Client(
     'AAAAAAAAAAAAAAAAAAAAAG9EhAEAAAAA%2BLR%2BJ1%2FpM0UC5y9QfHxPND7ccAI%3DvHGlimS0Gz93SWTqFglsr2J3PkYGUfLd7S7czHwsXyRMww8dNZ')
 
 SID = SentimentIntensityAnalyzer()
@@ -38,7 +38,7 @@ def get_tweets(id, max_results, from_date, until_date):
     """Get_tweets takes an id, max_results, from_date and an until_date and returns tweets as a list of strings."""
     tweets_list = []
 
-    tweets = tweepy.Paginator(client.get_users_tweets,
+    tweets = tweepy.Paginator(CLIENT.get_users_tweets,
                               id=id,
                               end_time=until_date,
                               max_results=max_results,
