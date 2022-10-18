@@ -1,5 +1,4 @@
-import datetime
-
+from datetime import datetime, date
 import pygal
 import tweepy
 import deep_translator
@@ -18,21 +17,54 @@ SID = SentimentIntensityAnalyzer()
 @app.route("/", methods=('GET', 'POST'))
 def index():
     if request.method == 'GET':
-        tweets = get_tweets(id='367703310',
-                            max_results=8,
-                            from_date=datetime.datetime(2022, 9, 18, 0, 0),
-                            until_date=datetime.datetime(2022, 10, 18, 23, 59))
+        # tweets = get_tweets(id='367703310',
+        #                     max_results=8,
+        #                     from_date=datetime(2022, 9, 18, 0, 0),
+        #                     until_date=datetime(2022, 10, 18, 23, 59))
+        # translated_tweets = translate_tweets(tweets)
+        # scores_tweets = analyze_tweets(translated_tweets)
+        # graph = plot_tweets(scores_tweets)
 
-        translated_tweets = translate_tweets(tweets)
-
-        scores_tweets = analyze_tweets(translated_tweets)
-
-        graph = plot_tweets(scores_tweets)
-
-        return render_template('index.html', graph=graph)
+        return render_template('index.html')
 
     if request.method == 'POST':
-        print(request.form)
+        form = request.form
+        tweets = []
+
+        # name = form['name']
+
+        client2 = tweepy.Client(
+            'AAAAAAAAAAAAAAAAAAAAAG9EhAEAAAAA%2BLR%2BJ1%2FpM0UC5y9QfHxPND7ccAI%3DvHGlimS0Gz93SWTqFglsr2J3PkYGUfLd7S7czHwsXyRMww8dNZ',
+            return_type=dict)
+        twitterid = client2.get_users(usernames=[form['name']])
+        id = twitterid['data'][0]['id']
+
+        if form['rangeOrAmountFrom'] == 'range':
+            max_results = 32
+            from_date = datetime.strptime(form['from'], "%Y-%m-%d")
+            until_date = datetime.strptime(form['until'], "%Y-%m-%d")
+            tweets = get_tweets(id=id, max_results=max_results, from_date=from_date, until_date=until_date)
+        elif form['rangeOrAmountFrom'] == 'amountFrom':
+            max_results = int(form['amount'])
+            from_date = datetime.strptime(form['from'], "%Y-%m-%d")
+            until_date = date.today()
+            tweets = []
+
+            tweetsp = tweepy.Paginator(CLIENT.get_users_tweets,
+                                       id=id,
+                                       max_results=max_results,
+                                       start_time=from_date)
+
+            for tweet in tweetsp.flatten(limit=max_results):
+                tweets.append(tweet.text)
+        else:
+            return
+
+        translated_tweets = translate_tweets(tweets)
+        scores_tweets = analyze_tweets(translated_tweets)
+        graph = plot_tweets(scores_tweets)
+        return render_template('index.html', graph=graph)
+
 
 def get_tweets(id, max_results, from_date, until_date):
     """Get_tweets takes an id, max_results, from_date and an until_date and returns tweets as a list of strings."""
@@ -73,6 +105,7 @@ def analyze_tweets(tweets):
 
     return scores
 
+
 def plot_tweets(tweet_scores):
     """Plot_tweets takes in a list of numbers and returns a pygal plot encoded in data_uri."""
     # TODO: Disable js.
@@ -80,6 +113,6 @@ def plot_tweets(tweet_scores):
     line_chart.add('Compound score', tweet_scores)
 
     line_chart.y_labels = [-1, -0.05, 0, 0.05, 1]
-    line_chart.x_labels = [*range(1, len(tweet_scores)+1)]
+    line_chart.x_labels = [*range(1, len(tweet_scores) + 1)]
 
     return line_chart.render_data_uri()
