@@ -3,10 +3,5 @@
 {% block title %}Title{% endblock %}
 
 {% block content %}
-<h1>Hello</h1>
-<ul>
-    {% for message in messages %}
-    <li>Title: {{ message['title'] }}, Message: {{ message['content'] }}</li>
-    {% endfor %}
-</ul>
+<img src="data:image/svg+xml;base64,{{graph}}">
 {% endblock %}
