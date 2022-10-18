@@ -12,6 +12,8 @@ CLIENT = tweepy.Client(
     'AAAAAAAAAAAAAAAAAAAAAG9EhAEAAAAA%2BLR%2BJ1%2FpM0UC5y9QfHxPND7ccAI%3DvHGlimS0Gz93SWTqFglsr2J3PkYGUfLd7S7czHwsXyRMww8dNZ',
     return_type=dict)
 
+FORM_DATE_STRING = '%Y-%m-%d'
+
 SID = SentimentIntensityAnalyzer()
 
 
@@ -22,33 +24,17 @@ def index():
 
     if request.method == 'POST':
         form = request.form
-        tweets = []
 
-        # name = form['name']
-
-        twitterid = CLIENT.get_users(usernames=[form['name']])
-        id = twitterid['data'][0]['id']
+        id = CLIENT.get_users(usernames=[form['name']])['data'][0]['id']
+        from_date = datetime.strptime(form['from'], FORM_DATE_STRING)
 
         if form['rangeOrAmountFrom'] == 'range':
-            max_results = 32
-            from_date = datetime.strptime(form['from'], "%Y-%m-%d")
-            until_date = datetime.strptime(form['until'], "%Y-%m-%d")
-            tweets = get_tweets(id=id, max_results=max_results, from_date=from_date, until_date=until_date)
+            until_date = datetime.strptime(form['until'], FORM_DATE_STRING)
+            tweets = get_tweets(id=id, from_date=from_date, until_date=until_date)
         elif form['rangeOrAmountFrom'] == 'amountFrom':
-            max_results = int(form['amount'])
-            from_date = datetime.strptime(form['from'], "%Y-%m-%d")
-            until_date = date.today()
-            tweets = []
-
-            tweetsp = tweepy.Paginator(CLIENT.get_users_tweets,
-                                       id=id,
-                                       max_results=max_results,
-                                       start_time=from_date)
-
-            for tweet in tweetsp.flatten(limit=max_results):
-                tweets.append(tweet.text)
+            tweets = get_tweets(id=id, max_results=int(form['amount']), from_date=from_date)
         else:
-            return
+            return 'Invalid option selected', 400
 
         translated_tweets = translate_tweets(tweets)
         scores_tweets = analyze_tweets(translated_tweets)
@@ -56,7 +42,7 @@ def index():
         return render_template('index.html', graph=graph)
 
 
-def get_tweets(id, max_results, from_date, until_date):
+def get_tweets(id, from_date, max_results=32, until_date=datetime.now()):
     """Get_tweets takes an id, max_results, from_date and an until_date and returns tweets as a list of strings."""
     tweets_list = []
 
