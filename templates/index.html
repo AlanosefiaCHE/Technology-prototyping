@@ -10,6 +10,10 @@
 
     <link rel="stylesheet" href="/static/style.css">
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.js"
+            integrity="sha512-d6nObkPJgV791iTGuBoVC9Aa2iecqzJRE0Jiqvk85BhLHAPhWqkuBiQb1xz2jvuHNqHLYoN3ymPfpiB1o+Zgpw=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
     <script>
         function showGreeting() {
             var myDate = new Date();
@@ -40,6 +44,8 @@
             });
         }
 
+        window.onload = showGreeting;
+
         function rangeOrAmountFromCheck() {
             if (document.getElementById('range').checked) {
                 document.getElementById('numberOfTweets').style.display = 'none';
@@ -49,118 +55,117 @@
                 document.getElementById('selectEndPeriod').style.display = 'none';
             }
         }
-
-        window.onload = showGreeting;
     </script>
 </head>
 
 <body>
 
-    <header>
-        <div>
-            <a href="#"><img src="/static/images/full-logo.svg" class="logo" alt="logo"></a>
-        </div>
+<header>
+    <div>
+        <a href="#"><img src="/static/images/full-logo.svg" class="logo" alt="logo"></a>
+    </div>
 
-        <nav>
-            <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">About us</a></li>
-                <li><a href="#">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
+    <nav>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About us</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </nav>
+</header>
 
-    <h2 class="greeting" id="lblGreetings"></h2>
+<h2 class="greeting" id="lblGreetings"></h2>
 
-    <main class="container">
-        <div class="left">
-            <form method="post">
-                <!-- Name -->
-                <div class="inputTextMiddle">
-                    <img src="/static/images/user.svg">
-                    <label for="name">Twitter name:</label>
-                </div>
-                <input class="textInput" type="text" id="name" name="name">
+<main class="container">
+    <div class="left">
+        <form method="post">
+            <!-- Name -->
+            <div class="inputTextMiddle">
+                <img src="/static/images/user.svg">
+                <label for="name">Twitter name:</label>
+            </div>
+            <input class="textInput" type="text" id="name" name="name">
 
-                <!-- Range or AmountFrom -->
-                <div>
-                    <input class="marginTop" type="radio" onclick="rangeOrAmountFromCheck();" id="range"
-                        name="rangeOrAmountFrom" value="range" checked>
-                    <label for="negative">Select period</label><br>
+            <!-- Range or AmountFrom -->
+            <div>
+                <input class="marginTop" type="radio" onclick="rangeOrAmountFromCheck();" id="range"
+                       name="rangeOrAmountFrom" value="range" checked>
+                <label for="negative">Select period</label><br>
 
-                    <input class="marginTop" type="radio" onclick="rangeOrAmountFromCheck();" id="amountFrom"
-                        name="rangeOrAmountFrom" value="amountFrom">
-                    <label for="positive">Number of tweets from a date</label><br>
-                </div>
-
-                <!-- Amount of tweets -->
-                <div class="marginTop" id="numberOfTweets" style="display:none">
-                    <div class="inputTextMiddle">
-                        <img src="/static/images/number-icon.svg">
-                        <label for="amount">Number of desired tweets:</label>
-                    </div>
-                    <input class="textInput" type="number" min="1" max="20" id='amount' name='amount'>
-                </div>
-
-                <!-- From -->
-                <div class="inputTextMiddle">
-                    <img class="marginTop" src="/static/images/datelogo-1.svg">
-                    <label class="marginTop" for="from">Select begin period:</label>
-                </div>
-                <input class="textInput" type="datetime-local" id="from" name="from">
-
-                <!-- Until -->
-                <div id="selectEndPeriod">
-                    <div class="inputTextMiddle">
-                        <img class="marginTop" src="/static/images/datelogo-19.svg">
-                        <label class="marginTop" for="until">Select end period:</label>
-                    </div>
-                    <input class="textInput" type="datetime-local" id="until" name="until">
-                </div>
-
-                <!-- Sumbit -->
-                <div class="marginTop">
-                    <input class="submit" type="submit" value="Submit">
-                </div>
-            </form>
-        </div>
-
-        <div class="right">
-            <h3>Resultaat</h3>
-            <img src="/static/images/graph-example.png" alt="Graph with results" class="resultGraph">
-            <!-- TODO: Activate form -->
-            <form>
-                <input type="checkbox" name="positive" value="positive">
-                <label for="positive"> View all positive Tweets</label><br>
-                <input type="checkbox" name="neutral" value="neutral">
-                <label for="neutral"> View all neutral Tweets</label><br>
-                <input type="checkbox" name="negative" value="negative">
-                <label for="negative"> View all negative Tweets</label><br><br>
-                <div class="submit2">
-                    <input class="submit" type="submit" value="Submit">
-                </div>
-            </form>
-        </div>
-    </main>
-
-    <footer>
-        <div class="footer-container">
-            <div class="left-col">
-                <img src="/static/images/full-logo.svg" class="logo">
-                <p class="rights-text">© 2022 Created By <b>Farmy Tweet</b> All Rights Reserved.</p>
+                <input class="marginTop" type="radio" onclick="rangeOrAmountFromCheck();" id="amountFrom"
+                       name="rangeOrAmountFrom" value="amountFrom">
+                <label for="positive">Number of tweets from a date</label><br>
             </div>
 
-            <div class="right-col">
-                <h1>Pharmy Tweet </h1>
-                <div class="border"></div>
-                <p>Get the freshest news from us!</p><br>
-                <form class="newsletter-form">
-                    <input class="txtb" type="text" placeholder="Enter Your Email">
-                    <input class="btn" type="submit" value="Submit">
-                </form>
+            <!-- Amount of tweets -->
+            <div class="marginTop" id="numberOfTweets" style="display:none">
+                <div class="inputTextMiddle">
+                    <img src="/static/images/number-icon.svg">
+                    <label for="amount">Number of desired tweets:</label>
+                </div>
+                <input class="textInput" type="number" min="1" max="20" id='amount' name='amount'>
             </div>
+
+            <!-- From -->
+            <div class="inputTextMiddle">
+                <img class="marginTop" src="/static/images/datelogo-1.svg">
+                <label class="marginTop" for="from">Select begin period:</label>
+            </div>
+            <input class="textInput" type="datetime-local" id="from" name="from">
+
+            <!-- Until -->
+            <div id="selectEndPeriod">
+                <div class="inputTextMiddle">
+                    <img class="marginTop" src="/static/images/datelogo-19.svg">
+                    <label class="marginTop" for="until">Select end period:</label>
+                </div>
+                <input class="textInput" type="datetime-local" id="until" name="until">
+            </div>
+
+            <!-- Sumbit -->
+            <div class="marginTop">
+                <input class="submit" type="submit" value="Submit">
+            </div>
+        </form>
+    </div>
+
+    <div class="right">
+        <h3>Resultaat</h3>
+        <img src="{{ graph }}" alt="Line chart of analysis results" class="resultGraph">
+
+        <!-- TODO: Activate form -->
+        <form>
+            <input type="checkbox" name="positive" value="positive">
+            <label for="positive"> View all positive Tweets</label><br>
+            <input type="checkbox" name="neutral" value="neutral">
+            <label for="neutral"> View all neutral Tweets</label><br>
+            <input type="checkbox" name="negative" value="negative">
+            <label for="negative"> View all negative Tweets</label><br><br>
+            <div class="submit2">
+                <input class="submit" type="submit" value="Submit">
+            </div>
+        </form>
+    </div>
+</main>
+
+<footer>
+    <div class="footer-container">
+        <div class="left-col">
+            <img src="/static/images/full-logo.svg" class="logo">
+            <p class="rights-text">© 2022 Created By <b>Farmy Tweet</b> All Rights Reserved.</p>
         </div>
-    </footer>
+
+        <div class="right-col">
+            <h1>Pharmy Tweet </h1>
+            <div class="border"></div>
+            <p>Get the freshest news from us!</p><br>
+            <form class="newsletter-form">
+                <input class="txtb" type="text" placeholder="Enter Your Email">
+                <input class="btn" type="submit" value="Submit">
+            </form>
+        </div>
+    </div>
+</footer>
 
 </body>
 
