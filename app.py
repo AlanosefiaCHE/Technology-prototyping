@@ -4,7 +4,7 @@ import pygal
 import tweepy
 import deep_translator
 import nltk
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, make_response
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 
 app = Flask(__name__)
@@ -75,7 +75,8 @@ def analyze_tweets(tweets):
 
 def plot_tweets(tweet_scores):
     """Plot_tweets takes in a list of numbers and returns a pygal plot encoded in data_uri."""
-    line_chart = pygal.Line(show_legend=False)
+    # TODO: Disable js.
+    line_chart = pygal.Line(show_legend=False, js=[''])
     line_chart.add('Compound score', tweet_scores)
 
     line_chart.y_labels = [-1, -0.05, 0, 0.05, 1]

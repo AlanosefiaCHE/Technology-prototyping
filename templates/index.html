@@ -10,10 +10,6 @@
 
     <link rel="stylesheet" href="/static/style.css">
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.js"
-            integrity="sha512-d6nObkPJgV791iTGuBoVC9Aa2iecqzJRE0Jiqvk85BhLHAPhWqkuBiQb1xz2jvuHNqHLYoN3ymPfpiB1o+Zgpw=="
-            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
     <script>
         function showGreeting() {
             var myDate = new Date();
@@ -131,6 +127,7 @@
 
     <div class="right">
         <h3>Resultaat</h3>
+        <!-- TODO: Try to do this with embed so js works-->
         <img src="{{ graph }}" alt="Line chart of analysis results" class="resultGraph">
 
         <!-- TODO: Activate form -->
