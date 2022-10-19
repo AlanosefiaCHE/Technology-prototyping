@@ -131,6 +131,11 @@
         <div class="right">
             <h3>Resultaat</h3>
             <!-- TODO: Try to do this with embed so js works-->
+            <ol>
+                {% for tweet in tweets %}
+                <li>{{tweet}}</li>
+                {% endfor %}
+            </ol>
         </div>
     </main>
 

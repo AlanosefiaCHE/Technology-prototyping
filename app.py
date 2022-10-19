@@ -13,7 +13,8 @@ def index():
 
     if request.method == 'POST':
         try:
-            name, range_or_amount_from, from_date, date_or_amount = form.parse_form(request.form)
+            name, range_or_amount_from, from_date, date_or_amount, show_tweets = form.parse_form(
+                request.form)
         except form.Error:
             return 'Invalid data in form.', 400
 
@@ -35,5 +36,13 @@ def index():
 
         translated_tweets = twitter.translate_tweets(tweets)
         scores_tweets = twitter.analyze_tweets(translated_tweets)
-        graph = twitter.plot_tweets(scores_tweets)
-        return render_template('index.html', graph=graph)
+
+        if not show_tweets:
+            graph = twitter.plot_tweets(scores_tweets)
+            return render_template(
+                'index_graph.html',
+                graph=graph)
+        else:
+            return render_template(
+                'index_tweets.html',
+                tweets=tweets[:8])

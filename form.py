@@ -1,4 +1,5 @@
 from datetime import datetime
+from multiprocessing.sharedctypes import Value
 
 FORM_DATE_STRING = '%Y-%m-%d'
 
@@ -21,24 +22,34 @@ def parse_form(form):
     else:
         raise Error
 
-    if 'from' in form:
+    if 'begin_date' in form:
         try:
-            from_date = datetime.strptime(form['from'], FORM_DATE_STRING)
+            from_date = datetime.strptime(form['begin_date'], FORM_DATE_STRING)
         except ValueError:
             raise Error
     else:
         raise Error
 
+    if 'show_tweets' in form:
+        show_tweets = form['show_tweets']
+    else:
+        show_tweets = False
+
     if range_or_amount_from == 'range':
-        if 'until' in form:
-            until_date = datetime.strptime(form['until'], FORM_DATE_STRING)
-            return name, range_or_amount_from, from_date, until_date
+        if 'end_date' in form:
+            try:
+                until_date = datetime.strptime(
+                    form['end_date'],
+                    FORM_DATE_STRING)
+            except ValueError:
+                raise Error
+            return name, range_or_amount_from, from_date, until_date, show_tweets
         else:
             raise Error
     elif range_or_amount_from == 'amountFrom':
         if 'amount' in form:
             amount = form['amount']
-            return name, range_or_amount_from, amount
+            return name, range_or_amount_from, amount, show_tweets
         else:
             raise Error
     else:
