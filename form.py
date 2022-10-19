@@ -3,6 +3,7 @@ from datetime import datetime
 FORM_DATE_STRING = '%Y-%m-%d'
 
 
+# Add more detailed errors
 class Error(Exception):
     pass
 

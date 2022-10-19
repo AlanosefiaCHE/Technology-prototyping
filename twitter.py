@@ -12,8 +12,11 @@ CLIENT = tweepy.Client(
 
 SID = SentimentIntensityAnalyzer()
 
+
+# Add more detailed errors
 class Error(Exception):
     pass
+
 
 def get_twitter_id(username):
     """Get_twitter_id takes a username and returns the corresponding twitter id."""
@@ -24,6 +27,7 @@ def get_twitter_id(username):
         return response['data'][0]['id']
     else:
         raise Error
+
 
 def get_tweets(id, from_date, max_results=32, until_date=datetime.now()):
     """Get_tweets takes an id, max_results, from_date and an until_date and returns tweets as a list of strings."""
