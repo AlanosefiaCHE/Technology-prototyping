@@ -49,7 +49,7 @@ def parse_form(form):
     elif range_or_amount_from == 'amountFrom':
         if 'amount' in form:
             amount = form['amount']
-            return name, range_or_amount_from, amount, show_tweets
+            return name, range_or_amount_from, from_date, amount, show_tweets
         else:
             raise Error
     else:
