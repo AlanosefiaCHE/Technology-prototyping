@@ -43,6 +43,7 @@ def index():
                 'index_graph.html',
                 graph=graph)
         else:
+            tweets_and_scores = zip(tweets[:8], scores_tweets[:8])
             return render_template(
                 'index_tweets.html',
-                tweets=tweets[:8])
+                tweets=tweets_and_scores)

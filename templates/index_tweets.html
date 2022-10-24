@@ -130,12 +130,22 @@
 
         <div class="right">
             <h3>Resultaat</h3>
-            <!-- TODO: Try to do this with embed so js works-->
-            <ol>
-                {% for tweet in tweets %}
-                <li>{{tweet}}</li>
+            <table>
+                <tr>
+                    <th>Sentiment</th>
+                    <th>Tweet</th>
+                </tr>
+                {% for tweet, score in tweets %}
+                <tr>
+                    <td>
+                        {% if score < -0.05 %}Negative{% elif score> 0.05 %}Positive{% else %}Neutral{% endif %}
+                    </td>
+                    <td>
+                        {{tweet}}
+                    </td>
+                </tr>
                 {% endfor %}
-            </ol>
+            </table>
         </div>
     </main>
 
