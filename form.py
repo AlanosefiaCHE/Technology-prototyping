@@ -3,25 +3,29 @@ from datetime import datetime
 FORM_DATE_STRING = '%Y-%m-%d'
 
 
-# Add more detailed errors
 class Error(Exception):
     pass
 
+# Met extra uitleg comments
 
 def parse_form(form):
     """Parses the main pharmytweet form."""
 
+    # Haal de naam uit het formulier, raise anders een error.
     if 'name' in form:
         name = form['name']
     else:
         raise Error
 
+    # Haal "rangeOrAmountFrom" uit het formulier, raise anders een error.
     if 'rangeOrAmountFrom' in form:
         range_or_amount_from = form['rangeOrAmountFrom']
     else:
         raise Error
 
+    # Haal de begindatum uit het formulier, raise anders een error.
     if 'begin_date' in form:
+        # Probeer de begindatum te parsen naar een date type, raise anders een error.
         try:
             from_date = datetime.strptime(form['begin_date'], FORM_DATE_STRING)
         except ValueError:
@@ -29,11 +33,13 @@ def parse_form(form):
     else:
         raise Error
 
+    # Haal "show_tweets" uit het formulier, zet het anders op False.
     if 'show_tweets' in form:
         show_tweets = form['show_tweets']
     else:
         show_tweets = False
 
+    # Probeer op basis van range_or_amount_from de datums te parsen naar een date type en return de resultaten, raise anders een error.
     if range_or_amount_from == 'range':
         if 'end_date' in form:
             try:
